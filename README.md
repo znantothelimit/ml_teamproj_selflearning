@@ -54,3 +54,6 @@ Decoder: ``` x̂ = sigmoid (W* * h(x) + c) ```
 ## Output
 
 ![output](/img/conclusion.png)
+
+1열 : 노이즈 추가된 이미지
+2열 : 오토인코더를 통해 노이즈 제거된 이미지
