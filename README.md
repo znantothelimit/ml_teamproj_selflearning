@@ -1,49 +1,47 @@
-# Image-Denoising-Using-Autoencoder
-Building and training an image denoising autoencoder using Keras with Tensorflow 2.0 as a backend.
+# 이미지 노이즈 제거 클래스 분류기
+오토인코더를 사용한 이미지 노이즈 제거 과정을 거친 CNN 이미지 분류기
 
 ## Overview
-- Import Key libraries, dataset and visualize images
-- Perform image normalization, pre-processing, and add random noise to images
-- Build an Autoencoder using Keras with Tensorflow 2.0 as a backend
-- Compile and fit Autoencoder model to training data 
-- Assess the performance of trained Autoencoder using various KPIs 
+- 라이브러리 불러오기 및 이미지 출력
+- 이미지 정규화 및 가공, 이미지 노이즈 추가
+- 오토인코더 모델 생성
+- 오토인코더 모델 학습
+- 오토인코더 모델 성능 파라미터 및 결과 출력
 
-## Prerequisites
-- Basic programming experience in python
-- Basic understanding of Tensorflow
-- Working knowledge of Machine Learning and Deep Learning
+![intuition](/img/intro.png?raw=true "Title")
 
-## Understanding the theory 
-### Autoencoder Intuition
-Autoencoders are a type of Artificial Neural Networks that are used to perform a task of data encoding (representation learning).
-Autoencoders use same input data for input as well as output, crazy right?
+## 오토인코더 개론
+![intuition](/img/autoencoderkor.png?raw=true "Title")
+
+### 오토인코더
+데이터 인코딩(representation learning) 작업을 수행하는 인공 신경망의 한 유형으로, 오토인코더의 특징으로는 입력 데이터를 입력 및 출력으로 사용한다.
 
 ![intuition](/img/AutoencoderDenoising.png?raw=true "Title")
 
-### Code Layer
-Autoencoders work by adding a bottleneck in the network.
-This bottleneck forces the network to create a compressed (encoded) version of the original input.
-Autoencoders work well if correlations exist between input data and (performs poorly if all the input data is independent).
+### 코드레이어
+오토인코더는 네트워크에 병목 현상을 만들어 줌으로서 동작한다. 
+이 병목 현상은 네트워크가 원래 입력의 압축된(encoded) 버전을 생성하도록 한다. 
+오토인코더는 입력 데이터와 상관관계가 있는 경우에 잘 작동한다.(입력 데이터가 모두 독립적인 경우에는 잘 작동하지 않을 수 있음)
 
-Great reference: “Intro to Autoencoders by Jeremy Jordan”
+참고 문헌: “Intro to Autoencoders by Jeremy Jordan”
 
 ![Code layer](/img/AutoencoderDenoising2.png)
 
-### Math behind Autoencoder
+### 오토인코더 수학적 원리
 Encoder: ``` h(x) = sigmoid (W * x + b) ```
 
 Decoder: ``` x̂ = sigmoid (W* * h(x) + c) ```
 
 ![math](/img/AutoencoderDenoising3.png)
 
-### Reconstruction Error
-Autoencoders objective is to minimize the reconstruction error which is the difference between the input X and the network output X̂. 
+### 재구성 오차
+오토인코더의 목표는 입력 X와 네트워크 출력 X^ 사이의 재구성 오차를 최소화하는 것이다. 
 
 ![reconstruction](/img/AutoencoderDenoising4.png)
 
 
 
-Autoencoders dimensionality reduction (latent space) is quite similar to PCA (Principal Component Analysis) if linear activation functions are used.
+오토인코더의 차원 축소(잠재 공간)는 선형 활성화 함수를 사용하는 경우 PCA(주성분 분석)와 매우 유사하다.
 
 
 ## Installing
@@ -66,8 +64,3 @@ Follow the steps in the notebook if you want to train your own or you can simply
 This is a side-by-side comparison of the input images with added noise and the reconstructed output from the network.
 
 ![output](/img/AutoencoderDenoising5.png)
-
-
-## References to study in detail about related topics
-* [Autoencoders](https://towardsdatascience.com/applied-deep-learning-part-3-autoencoders-1c083af4d798)
-* [Deep Learning](https://www.datacamp.com/community/tutorials/deep-learning-python)
