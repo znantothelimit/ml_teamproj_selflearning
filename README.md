@@ -3,10 +3,15 @@
 
 # 팀원
 성결대학교 정보통신공학과 23-1 머신러닝(월 4-6)
+
 TEAM SELF-LEARNING
+
 20190895 김찬영
+
 20190954 허진환
+
 20190948 지성원
+
 20190919 우상욱
 
 ## Overview
@@ -27,8 +32,10 @@ TEAM SELF-LEARNING
 ![intuition](/img/AutoencoderDenoising.png?raw=true "Title")
 
 ### 코드레이어
-오토인코더는 네트워크에 병목 현상을 만들어 줌으로서 동작한다. 
+오토인코더는 네트워크에 병목 현상을 만들어 줌으로서 동작한다.
+
 이 병목 현상은 네트워크가 원래 입력의 압축된(encoded) 버전을 생성하도록 한다. 
+
 오토인코더는 입력 데이터와 상관관계가 있는 경우에 잘 작동한다.(입력 데이터가 모두 독립적인 경우에는 잘 작동하지 않을 수 있음)
 
 참고 문헌: “Intro to Autoencoders by Jeremy Jordan”
