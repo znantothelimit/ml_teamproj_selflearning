@@ -23,13 +23,35 @@ TEAM SELF-LEARNING
 
 ![intuition](/img/intro.png?raw=true "Title")
 
-## 오토인코더 개론
-![intuition](/img/autoencoderkor.png?raw=true "Title")
+## CNN(합성곱 신경망)
+신경망: 신경망의 기본 단위는 퍼셉트론이다. 입력 레이어에서 이 퍼셉트론으로 입력이 들어가고, 이 퍼셉트론은 결과를 출력한다. 본 프로젝트에서의 입력은 이미지로 들어가게 되는데, 이 이미지는 훈련 및 테스트 데이터셋으로 나눠진다. 그런 다음 훈련 데이터셋으로 모델을 학습시킨다. 그 후 테스트 데이터셋으로 모델의 성능을 테스트한다. 프로세스의 마지막 부분은 임의의 입력 데이터의 클래스를 예측하는 것이다.
+
+![CNN1](/img/CNN1.png?raw=true "Title")
+
+![CNN2](/img/CNN2.jpg?raw=true "Title")
+
+1. 입력층에서의 이미지 정규화: 첫 번째 단계는 입력 이미지를 정규화하는 것으로, 이미지는 RGB 값의 집합으로 이루어져 있으며, 이 값들은 채널로써 주어진다. 채널의 값이 1이면 그레이스케일, 3이면 RGB이다. 따라서 이러한 값을 공통 범위로 정규화해야 한다. 첫 번째 레이어에서 이미지를 RGB로 정규화한다 (픽셀 단위).
+
+2. 활성화 함수: 입력을 임계값으로 처리하기 위해 ReLU를 사용한다. 합성곱 계층에서 정의된다. ReLU 함수는 음수를 0으로 만들고, 양수는 그대로 유지하는 함수이다.
+
+3. 합성곱 계층 : 입력 데이터로부터 이미지의 특징을 추출하는 역할을 한다. 각 합성곱 층은 여러 개의 필터 또는 커널로 구성되어 있다. 필터는 입력 데이터에 대해 지역적인 패턴을 탐지하는 작은 윈도우로, 입력 데이터를 윈도우마다 합성곱 연산을 수행하여 특징 맵을 생성한다. 합성곱 층의 출력에서 활성화 함수인 ReLU가 사용된다.
+
+4. 풀링 층 : 특징 맵의 크기를 줄이거나 중요 정보를 강조하는 역할을 한다. 일반적으로 최대 풀링이 사용되고, 최대 풀링은 윈도우 내에서 가장 큰 값을 선택하여 특징을 강조하며, 나머지 값은 버리는 방식으로 동작한다.
+
+5. 완전 연결 층 : 추출된 특징을 기반으로 클래스의 예측을 수행한다. 풀링 층의 출력을 일렬로 펼친 후 완전 연결 층에 전달한다. 완전 연결 층은 일반적인 다층 퍼셉트론 구조로 구성되어 있으며, 출력층은 클래스 분류를 위한 뉴런 수와 활성화 함수를 설정하여 최종 예측을 수행하게 된다.
+
+CNN은 합성곱층과 풀링층을 거치면서 입력 이미지의 주요 특성 벡터를 추출하여, 완전연결층을 거치면서 1차원 벡터로 변환되고, 마지막으로 출력층에서 활성화 함수인 소프트맥스 함수를 사용하여 최종 결과가 출력된다.
 
 ### 오토인코더
 데이터 인코딩(representation learning) 작업을 수행하는 인공 신경망의 한 유형으로, 오토인코더의 특징으로는 입력 데이터를 입력 및 출력으로 사용한다.
 
+![intuition](/img/autoencoderkor.png?raw=true "Title")
+
 ![intuition](/img/AutoencoderDenoising.png?raw=true "Title")
+
+본 프로젝트에서는 (3, 3) 윈도우 크기의 32개 filter를 사용하여 합성곱 연산 및 출력(ReLU 함수 사용)하여 특성을 추출한 후, 풀링층으로 진입해 특징 맵 크기를 1/2로 줄이고 특징을 강조한 뒤, 2차 합성곱층으로 진입하여 인코딩 과정을 거치는 인코더 부분과 입력 데이터의 각 차원을 2배로 확장하고 이미지 특성을 3개의 필터로 추출하여 디코딩 과정을 거치는 디코더 부분으로 구성된 오토인코더 모델을 설계하고 모델 훈련 및 예측에 활용하였다.
+
+![Autoencodermodel](/img/Autoencodermodel.png?raw=true "Title")
 
 ### 코드레이어
 오토인코더는 네트워크에 병목 현상을 만들어 줌으로서 동작한다.
@@ -37,8 +59,6 @@ TEAM SELF-LEARNING
 이 병목 현상은 네트워크가 원래 입력의 압축된(encoded) 버전을 생성하도록 한다. 
 
 오토인코더는 입력 데이터와 상관관계가 있는 경우에 잘 작동한다.(입력 데이터가 모두 독립적인 경우에는 잘 작동하지 않을 수 있음)
-
-참고 문헌: “Intro to Autoencoders by Jeremy Jordan”
 
 ![Code layer](/img/AutoencoderDenoising2.png)
 
@@ -54,14 +74,36 @@ Decoder: ``` x̂ = sigmoid (W* * h(x) + c) ```
 
 ![reconstruction](/img/AutoencoderDenoising4.png)
 
-
-
 오토인코더의 차원 축소(잠재 공간)는 선형 활성화 함수를 사용하는 경우 PCA(주성분 분석)와 매우 유사하다.
 
+### CNN(합성곱 신경망) 클래스 분류기
+본 프로젝트에서 설계된 클래스 분류기는 합성곱층에서의 이미지 특성 추출과 풀링층에서의 이미지 특성 강조 단계를 여러 번 거친 후, 레이어를 Flatten하여 1차원으로 차원 축소한 후, 완전 연결층에서 추출된 이미지 특성을 입력으로 받아 계산을 수행하도록 한 후, softmax함수를 사용하여 출력 층에서 클래스 개수(10개 : cifar-10 데이터셋 활용)만큼의 뉴런을 가지도록 하여 각 클래스에 대한 확률 값을 출력하도록 하였다.
+
+![Classifiermodel](/img/Classifiermodel.png?raw=true "Title")
+
+
 ## Output
+
+### AutoEncoder Output
 
 ![output](/img/conclusion.png)
 
 1열 : 노이즈 추가된 이미지
 
 2열 : 오토인코더를 통해 노이즈 제거된 이미지
+
+### AutoEncoder Model Test Accuracy Parameter
+
+![score1](/img/Autoencoderscore.png)
+
+### Classifier Output
+
+![output2](/img/conclusion2.png)
+
+Pred : 예측 결과 
+
+True : 정답 레이블
+
+### Classifier Model Test Accuracy Parameter
+
+![score1](/img/Classifierscore.png)
