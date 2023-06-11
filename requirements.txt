@@ -1,3 +1,4 @@
+cifar-10 dataset
 notebook
 tensorflow==2.0
 pandas
@@ -5,3 +6,4 @@ numpy
 matplotlib
 seaborn
 random
+keras
